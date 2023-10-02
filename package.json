@@ -1,0 +1,20 @@
+{
+  "name": "employeereviewsystem",
+  "version": "1.0.0",
+  "description": "Employee reveiew management system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod_start": "NODE_ENV=PRODUCTION nodemon index.js"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Gagan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.3"
+  }
+}
