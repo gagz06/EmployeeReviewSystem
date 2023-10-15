@@ -10,7 +10,7 @@
         <p>
             Select Employee for feedback
         </p>
-        <ul>
+        <ul style="list-style: none;">
             <% for(employee of employeeList) {%>
             <li style="padding: 5px;">
                 <div style="border: solid; display: flex; padding: 5px; text-align: center;">
@@ -65,23 +65,28 @@
     </div>
 </div>
 <div style="border: solid;">
-    <ul>
+    <ul style="list-style: none;">
+        <% if(performanceReviewList.length!=0){%>
+        <%for(performanceReview of performanceReviewList){%>
+            <li style="padding: 10px;">
+                <div style="border: solid;">
+                    <label>
+                        Review 1
+                    </label>
+                    <a href="#">Manage</a>
+                </div>
+            </li>
+            <%}%>
+            <%}else{%>
         <li style="padding: 10px;">
-            <div style="border: solid;">
+            <div style="border: solid; padding: 10px; text-align: center;">
                 <label>
-                    Review 1
+                    No Review Exist
                 </label>
-                <a href="#">Manage</a>
+                <!-- <a href="#">Manage</a> -->
             </div>
         </li>
-        <li style="padding: 10px;">
-            <div style="border: solid;">
-                <label>
-                    Review 2
-                </label>
-                <a href="#">Manage</a>
-            </div>
-        </li>
+        <%}%>
     </ul>
 </div>
 

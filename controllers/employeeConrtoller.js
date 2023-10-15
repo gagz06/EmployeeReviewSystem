@@ -41,7 +41,8 @@ module.exports.create = function (req, res) {
 
 module.exports.updateEmployee = async function (req, res) {
   try {
-    const empId = req.params.id;
+    if(res.locals.employee.userAccessType=='Admin'){
+      const empId = req.params.id;
     const updatedEmployeeData = {
       name: req.body.name,
       email: req.body.email,
@@ -61,6 +62,7 @@ module.exports.updateEmployee = async function (req, res) {
       console.log("No such Employee exists");
       return res.status(404).send("No such Employee exists");
     }
+    }
   } catch (error) {
     console.log("Error in employee updation", error);
     return res.redirect("back");
@@ -68,14 +70,11 @@ module.exports.updateEmployee = async function (req, res) {
 };
 
 module.exports.home = function (req, res) {
-  if(res.locals.userAccessType=='Employee'){
     return res.render("home", {
       title: "ERS | Home",
     });
-  }
-  else{
-    return res.redirect('/adminHome');
-  }
+  
+  
 };
 module.exports.deleteEmployee = async function (req, res) {
   try {

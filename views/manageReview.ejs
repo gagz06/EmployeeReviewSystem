@@ -1,8 +1,58 @@
-<div style="display: flex;">
-    <div style="border: solid; flex: 1;">
-        
+<div id="feedbacksfor" style="border: solid; text-align: center; padding: 10px;">
+    <h2>
+        Employee Details
+    </h2>
+    <label for="">Name</label><br>
+    <label>Email</label>
+</div>
+<div style="display: flex; padding: 10px;">
+    <div id="assignReview" style="flex: 1; padding: 10px; border: solid;">
+        <h2>Ask Feedback from users</h2>
+        <ul style="list-style: none;">
+           <% if(employeeList.length>0){%>
+            <%for(employee of employeeList){%>
+                <li style="border: solid; padding: 10px;">
+                    <div style="display: flex;" >
+                        <label style="flex: 1;"><%= employee.name%></label>
+                        <label style="flex: 1;"><%= employee.email%></label>
+                        <a href="/assignReview/<%=employee._id%>" style="text-decoration: none; flex: 1; ">Assign for Review</a>
+                    </div>
+                </li>
+                <%}%>
+           <%}else{%>
+            <li>
+                <div>
+                    <label>Not assigned any Reviews</label>
+                    <a style="text-decoration: none; color: inherit;">Assign for Review</a>
+                </div>
+            </li>
+            <%}%>
+        </ul>
     </div>
-    <div style="border: solid; flex: 1;">
-
+    <div style="flex: 1; border: solid; padding: 10px;">
+        <h2>
+            Feedbacks asked from
+        </h2>
+        <ul style="list-style: none;">
+            <li style="border: solid;">
+                <div>
+                    <label>test </label>
+                </div>
+            </li>
+        </ul>
     </div>
+</div>
+<div style="border: solid; padding: 10px;">
+    <h2>
+        Feedbacks Received
+    </h2>
+<ul>
+    <li>
+      <div>
+        <label for="">Good</label>
+        <label for="">From test</label>
+        <label for="">email</label>
+      </div>
+    </li>
+</ul>
 </div>

@@ -1,5 +1,5 @@
 const employeeSchema = require('../models/employeeModel');
-
+const performanceReviewSchema = require('../models/performanceReview');
 module.exports.signOut = function (req,res) {
     req.logout(function (err) {
         if (err) {
@@ -14,10 +14,13 @@ module.exports.adminHome = async function (req,res) {
             if (res.locals.employee.userAccessType=='Admin') {
                 //console.log(res.locals.employee);
             let employeeList = await employeeSchema.find({});
+            let performanceReviewList = await performanceReviewSchema.find({});
         return res.render("adminHome",{
             title:"Admin Home",
-            employeeList: employeeList
+            employeeList: employeeList,
+            performanceReviewList:performanceReviewList
         })
+
             } else {
                 return res.redirect('/employee/home');
             }
@@ -52,6 +55,12 @@ module.exports.manageUser = async function(req,res){
     }
 }
 
-module.exports.manageReview = function (req,res) {
-    
+module.exports.manageReview = async function (req,res) {
+    let employeeList = await employeeSchema.find({});
+    let filteredEmployeeList = employeeList.filter(employee => employee.id !== req.params.id);
+
+    res.render('manageReview',{
+        title: 'Manage Review',
+        employeeList:filteredEmployeeList
+    });
 }
