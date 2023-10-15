@@ -1,0 +1,27 @@
+/* Style for the footer container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  /* Center the content inside the footer */
+  .footer-content {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  /* Style for links or other elements inside the footer */
+  .footer-links a{
+    text-decoration: none;
+    color: yellow;
+    margin: 0 10px;
+  }
+  

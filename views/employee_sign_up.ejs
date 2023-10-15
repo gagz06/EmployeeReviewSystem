@@ -1,11 +1,12 @@
+<link rel="stylesheet" href="/css/empSignUp_layout.css">
 <h1>
     <center>
         Sign UP!!!!
     </center>
 </h1>
 <div id="signUp-container">
-    <form action="/employee/create" id="new-employee-form">
-        <table>
+    <form action="/employee/create" id="new-employee-form" method="POST">
+        <table id="tbl-sign-up">
             <tr>
                 <td><label>Name:</label></td>
                 <td><input type="text" name="name" placeholder="Your name" required><br /></td>
@@ -28,7 +29,7 @@
             </tr>
             <tr>
                 <td>
-                    <label>Confirm Password</label>
+                    <label>Confirm Password </label>
                 </td>
                 <td>
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required><br />
@@ -37,7 +38,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" value="Sign Up">
+                    <input type="submit" id="btnSubmit" value="Sign Up">
                 </td>
             </tr>
         </table>

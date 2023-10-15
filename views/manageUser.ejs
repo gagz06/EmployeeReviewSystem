@@ -1,0 +1,89 @@
+<div style="display: flex;">
+    <div style="border: solid; padding: 10px; flex: 1;">
+        <form id="updateEmployeeForm" method="post" action="/employee/update/<%=employee._id%>">
+            <table>
+                <tr>
+                    <td>
+                        <label>Name</label>
+                    </td>
+                    <td>
+                        <input type="text" name="name" value="<%=employee.name%>" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email</label>
+                    </td>
+                    <td>
+                        <input type="email" name="email" value="<%=employee.email%>" disabled>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td>
+                        <label>Password</label>
+                    </td>
+                    <td>
+                        <input type="password" disabled>
+                    </td>
+                </tr>
+                <tr id="confirmPass" style="display: none;">
+                    <td>
+                        <label>Confirm Password</label>
+                    </td>
+                    <td>
+                        <input type="password">
+                    </td>
+                </tr> -->
+                <tr>
+                    <td>Access Type</td>
+                    <td>
+                        <fieldset id="empAcessType">
+                            <input type="radio" name="role" value="Admin" disabled <%= employee.userAccessType === "Admin" ? 'checked' : '' %>>Admin
+                            <input type="radio" name="role" value="Employee" disabled <%= employee.userAccessType === "Employee" ? 'checked' : '' %>>Employee
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button id="btnEdit">Edit</button>
+                        <button id="deleteEmp"><a style="color: black;" href="/employee/delete/<%=employee._id%>">Delete</a></button>
+                        <input type="submit" value="Update" id="btnSubmit" style="display: none;">
+                        <button id="btnCancel" style="display: none;">Cancel</button>
+                    </td>
+                </tr>
+                
+            </table>
+        </form>
+    </div>
+</div>
+<script>
+    const editButton=document.getElementById("btnEdit");
+    const cancelButton = document.getElementById("btnCancel");
+    const deleteButton = document.getElementById("deleteEmp");
+    editButton.onclick= function(event){
+        event.preventDefault();
+        document.getElementById("btnSubmit").style.display="inline";
+        editButton.style.display="none";
+        const inputFields = document.querySelectorAll('input');
+        inputFields.forEach(function(inputFields){
+            inputFields.disabled=false;
+        });
+        cancelButton.style.display="inline";
+        deleteButton.style.display="none";
+    };
+    
+        cancelButton.onclick= function (event) {
+        event.preventDefault();
+        document.getElementById("btnSubmit").style.display="none";
+        editButton.style.display="inline";
+        const inputFields = document.querySelectorAll('input');
+        inputFields.forEach(function(inputFields){
+            inputFields.disabled=true;
+        });
+        cancelButton.style.display="none";
+        deleteButton.style.display="inline";
+    }
+</script>

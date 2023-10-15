@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="/css/adminHome_layout.css">
+<h1>
+    <center>
+        Admin Panel
+    </center>
+</h1>
+
+<div style="display: flex;">
+    <div style="border: solid; padding: 10px; flex: 1;">
+        <p>
+            Select Employee for feedback
+        </p>
+        <ul>
+            <% for(employee of employeeList) {%>
+            <li style="padding: 5px;">
+                <div style="border: solid; display: flex; padding: 5px; text-align: center;">
+                    <label style="flex: 1;"> <%=employee.name%></label>
+                    <a style="flex: 0.3;" href="/manageReview/<%=employee.id%>">Manage Review</a>
+                    <a href="/manageUser/<%=employee.id%>">Manage User</a>
+                </div>
+            </li>
+            <%}%>
+        </ul>
+    </div>
+    <div style="border: solid; padding-left: 10px; flex: 1;">
+        <h1>Add New User</h1>
+        <form style="padding:0px 0px 10px 10px;" action="/employee/create" method="post">
+            <table id="tbl-add-emp">
+                <tr>
+                    <td><label>Name:</label></td>
+                    <td><input type="text" name="name" placeholder="Your name" required><br /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email:</label>
+                    </td>
+                    <td>
+                        <input type="email" name="email" placeholder="Your email" required><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Password</label>
+                    </td>
+                    <td>
+                        <input type="password" name="password" placeholder="Password" required><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Confirm Password </label>
+                    </td>
+                    <td>
+                        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" id="btnSubmit" value="Add Employee">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div style="border: solid;">
+    <ul>
+        <li style="padding: 10px;">
+            <div style="border: solid;">
+                <label>
+                    Review 1
+                </label>
+                <a href="#">Manage</a>
+            </div>
+        </li>
+        <li style="padding: 10px;">
+            <div style="border: solid;">
+                <label>
+                    Review 2
+                </label>
+                <a href="#">Manage</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
