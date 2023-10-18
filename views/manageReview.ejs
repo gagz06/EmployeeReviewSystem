@@ -2,12 +2,12 @@
     <h2>
         Employee Details
     </h2>
-    <label for="">Name</label><br>
-    <label>Email</label>
+    <label for=""><%=employeeForReview.name%></label><br>
+    <label><%=employeeForReview.email%></label>
 </div>
 <div style="display: flex; padding: 10px;">
     <div id="assignReview" style="flex: 1; padding: 10px; border: solid;">
-        <h2>Ask Feedback from users</h2>
+        <h2>Ask Feedback for: <i style="color: blue;"><%=employeeForReview.name%></i></h2>
         <ul style="list-style: none;">
            <% if(employeeList.length>0){%>
             <%for(employee of employeeList){%>
@@ -15,7 +15,7 @@
                     <div style="display: flex;" >
                         <label style="flex: 1;"><%= employee.name%></label>
                         <label style="flex: 1;"><%= employee.email%></label>
-                        <a href="/assignReview/<%=employee._id%>" style="text-decoration: none; flex: 1; ">Assign for Review</a>
+                        <a href="/assignReview/<%=employee._id%>/<%=employeeForReview.id%>" style="text-decoration: none; flex: 1; ">Ask for Review</a>
                     </div>
                 </li>
                 <%}%>

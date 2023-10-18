@@ -11,5 +11,6 @@ router.use('/employee',require('./employee'));
 router.get('/adminHome',passport.checkAuthentication,homeController.adminHome);
 router.get('/manageUser/:id',homeController.manageUser);
 router.get('/manageReview/:id',homeController.manageReview);
+router.get('/assignReview/:toFeedback/:forFeedback',homeController.assignReview);
 router.get('/sign-out',homeController.signOut);
 module.exports = router;

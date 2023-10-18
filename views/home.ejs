@@ -1,20 +1,44 @@
 <link rel="stylesheet" href="/css/home_layout.css">
 <% if(locals.employee){%>
-<div id="home-container">
+    <div id="employeeDetailsdiv" style="text-align: center; border: solid; padding: 10px;">
+        <h3>Name : <i><%= employeeDetails.name%></i></h3>
+        <h3>Email : <i><%= employeeDetails.email%></i></h3>
+        <h3>Access Type : <i><%= employeeDetails.userAccessType%></i></h3>
+    </div>
+    <br>
+<div id="home-container" style="border: solid; padding: 10px;">
     <section id="feedback-list">
         <h4>
-            Pending Feedbacks of Employees
+            Pending Feedbacks 
         </h4>
-        <div id="feedback-list-container">
-            <ul>
-                <li>
-                    <label>
-                        Emp 1
-                    </label>
-                </li>
-                
+        <div id="feedback-list-container" >
+            <ul style="list-style: none;">
+                <% if(employeeDetails.assigned_reviews.length){%>
+                <%for(feedback of employeeDetails.assigned_reviews){%>
+                    <li>
+                        <div>
+                            <label>
+                                <%= feedback.name%>
+                            </label>
+                            <label for="">
+                                <%= feedback.email%>
+                            </label>
+                            <a href="/employee/feedback-form/<%= employeeDetails.id %>/<%= feedback.id %>" style="color: black; border: solid;"><strong>Submit Feedback</strong></a>
+                        </div>
+                    </li>
+                    <%}%>
+                <%}else{%>
+                    <li>
+                        <div>
+                            <label>
+                                No Feedbacks Pending
+                            </label>
+                        </div>
+                    </li>
+                    <%}%>
             </ul>
         </div>
     </section>
 </div>
+
 <%}%>

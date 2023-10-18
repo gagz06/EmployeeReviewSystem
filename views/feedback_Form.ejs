@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="/css/feedback_form.css">
+<h1>
+    <center>
+        Feedback Form
+    </center>
+</h1>
+<div id="feedbackDiv">
+    <% let path %>
+    <% if(reviewer.userAccessType == "Employee") {
+      path="/employee/submit-feedback";
+    } else {%>
+    <% path="/admin/submit-feedback"  %>
+    <% }%> 
+    <form method="post" id="feedbacksForm" action=<%= path %> >
+        <input type="hidden" name="reviewerId" value="<%= reviewer.id %>">
+        <input type="hidden" name="employeeId" value="<%= employee.id %>">
+        <table>
+            <tr>
+                <td>
+                    <label for="">Teamwork Rating</label>
+                </td>
+                <td>
+                    <div id="teamworkDiv">
+                        <fieldset id="teamworkFieldset">
+                            <input type="radio" name="teamworkRating" value="1" required>1
+                            <input type="radio" name="teamworkRating" value="2">2
+                            <input type="radio" name="teamworkRating" value="3">3
+                            <input type="radio" name="teamworkRating" value="4">4
+                            <input type="radio" name="teamworkRating" value="5">5
+                        </fieldset>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">knowledge Rating</label>
+                </td>
+                <td>
+                    <div id="knowledgeDiv">
+                        <fieldset id="knowledgeFieldset">
+                            <input type="radio" name="knowledgeRating" value="1" required>1
+                            <input type="radio" name="knowledgeRating" value="2">2
+                            <input type="radio" name="knowledgeRating" value="3">3
+                            <input type="radio" name="knowledgeRating" value="4">4
+                            <input type="radio" name="knowledgeRating" value="5">5
+                        </fieldset>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Communication</label>
+                </td>
+                <td>
+                    <div id="communicationDiv">
+                        <fieldset id="communicationFieldset">
+                            <input type="radio" name="communicationRating" value="1" required>1
+                            <input type="radio" name="communicationRating" value="2">2
+                            <input type="radio" name="communicationRating" value="3">3
+                            <input type="radio" name="communicationRating" value="4">4
+                            <input type="radio" name="communicationRating" value="5">5
+                        </fieldset>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Additional Feedback</label>
+                </td>
+                <td>
+                    <div>
+                        <textarea type="text" name="feedback" id="feedback" rows="5" cols="30"required></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" id="submitFeedback" value="Submit Feedback" ></td>
+            </tr>
+    </table>
+    </form>
+</div>

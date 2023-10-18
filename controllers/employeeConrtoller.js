@@ -1,5 +1,26 @@
 const employeeSchema = require("../models/employeeModel");
 
+module.exports.submitFeedback = async function (req,res) {
+  console.log(req.body);
+  res.redirect('back');
+}
+module.exports.feedBackForm = async function (req,res) {
+  try {
+    //find the data of the reviewer by id
+  let reviewer = await employeeSchema.findById(req.params.reviewerId);
+
+  //find the data of the employee by id
+  let employee = await employeeSchema.findById(req.params.employeeId);
+  return res.render('feedback_Form',{
+    title:'Feedback',
+    employee:employee,
+    reviewer:reviewer
+  })
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports.signUp = function (req, res) {
     if (req.isAuthenticated()) {
         return res.redirect("/employee/home");
@@ -69,9 +90,19 @@ module.exports.updateEmployee = async function (req, res) {
   }
 };
 
-module.exports.home = function (req, res) {
+module.exports.home = async function (req, res) {
+    let empId = res.locals.employee.id;
+    const employeeDetails = await employeeSchema.findById(empId).populate({
+      path: "assigned_reviewers",
+      model: "Employee",
+    })
+    .populate({
+      path: "assigned_reviews",
+      model: "Employee",
+    });
     return res.render("home", {
       title: "ERS | Home",
+      employeeDetails:employeeDetails
     });
   
   

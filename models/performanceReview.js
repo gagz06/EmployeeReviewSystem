@@ -1,5 +1,21 @@
 const mongoose = require('mongoose');
 const performanceReviewSchema = new mongoose.Schema({
+
+  //teamwork rating
+  teamwork: {
+    type: Number,
+    required: true,
+  },
+  //work knowledge rating
+  knowledge: {
+    type: Number,
+    required: true,
+  },
+  //communication with team rating
+  communication: {
+    type: Number,
+    required: true,
+  },
   //Feedback
   feedback: {
     type: "String",

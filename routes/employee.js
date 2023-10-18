@@ -14,6 +14,6 @@ router.post('/create-session',passport.authenticate(
     'local',
     {failureRedirect: '/employee/sign-in'}
 ),employeeConrtoller.createSession);
-
-
+router.get('/feedback-form/:reviewerId/:employeeId',employeeConrtoller.feedBackForm);
+router.post('/submit-feedback',employeeConrtoller.submitFeedback);
 module.exports = router;
