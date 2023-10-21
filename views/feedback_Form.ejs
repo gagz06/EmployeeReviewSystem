@@ -9,13 +9,13 @@
     <% if(reviewer.userAccessType == "Employee") {
       path="/employee/submit-feedback";
     } else {%>
-    <% path="/admin/submit-feedback"  %>
+    <% path="/admin/submit-feedback";  %>
     <% }%> 
     <form method="post" id="feedbacksForm" action=<%= path %> >
         <input type="hidden" name="reviewerId" value="<%= reviewer.id %>">
-        <input type="hidden" name="employeeId" value="<%= employee.id %>">
+        <input type="hidden" name="employeeId" value="<%= emp.id %>">
         <table>
-            <tr><h2>Submit <%= employee.name %> Feedback </h2></tr>
+            <tr><h2>Submit <%= emp.name %> Feedback </h2></tr>
             <tr>
                 <td>
                     <label for="">Teamwork Rating</label>

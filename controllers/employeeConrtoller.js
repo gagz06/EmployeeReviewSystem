@@ -79,10 +79,10 @@ module.exports.feedBackForm = async function (req,res) {
   let reviewer = await employeeSchema.findById(req.params.reviewerId);
 
   //find the data of the employee by id
-  let employee = await employeeSchema.findById(req.params.employeeId);
+  let emp = await employeeSchema.findById(req.params.employeeId);
   return res.render('feedback_Form',{
     title:'Feedback',
-    employee:employee,
+    emp:emp,
     reviewer:reviewer
   })
   

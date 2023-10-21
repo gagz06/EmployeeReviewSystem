@@ -1,58 +1,132 @@
-<div id="feedbacksfor" style="border: solid; text-align: center; padding: 10px;">
-    <h2>
-        Employee Details
-    </h2>
-    <label for=""><%=employeeForReview.name%></label><br>
-    <label><%=employeeForReview.email%></label>
-</div>
-<div style="display: flex; padding: 10px;">
+<style>
+    h2{
+        color: yellow;
+    }
+    body{
+        background-color: blueviolet;
+    }
+    #receivedFeedbackList label{
+        color: white;
+        font-size: large;
+    }
+    #feedbacksfor label{
+        color: white;
+        font-size: large;
+    }
+    #askedFromFeedbackList label{
+        color: white;
+        font-size: large;
+    }
+    #empList label{
+        color: white;
+        font-size: large;
+    }
+div a{
+        display: inline-block;
+padding: 5px ;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+border: none;
+border-radius: 5px;
+background-color: #3498db;
+color: #fff;
+cursor: pointer;
+transition: background-color 0.3s ease;
+    }
+</style>
+
+<div id="empList" style="display: flex; padding: 10px;">
     <div id="assignReview" style="flex: 1; padding: 10px; border: solid;">
-        <h2>Ask Feedback for: <i style="color: blue;"><%=employeeForReview.name%></i></h2>
-        <ul style="list-style: none;">
+        <h2 style="text-align: center;">Ask Feedback for: <i><%=employeeForReview.name%></i></h2>
+        <ul style="list-style: none; height: 120px; overflow-y: auto;">
            <% if(employeeList.length>0){%>
             <%for(employee of employeeList){%>
-                <li style="border: solid; padding: 10px;">
+                <li style=" padding: 10px;  border: solid; border-radius: 10px; margin: 5px;">
                     <div style="display: flex;" >
                         <label style="flex: 1;"><%= employee.name%></label>
-                        <label style="flex: 1;"><%= employee.email%></label>
-                        <a href="/assignReview/<%=employee._id%>/<%=employeeForReview.id%>" style="text-decoration: none; flex: 1; ">Ask for Review</a>
+                        <label style="flex: 1; text-align: left;"><%= employee.email%> </label>
+                         <% let assignedReviewer = employee.assigned_reviews.filter((a) => { 
+                        return a.equals(employeeForReview.id);
+                      }); %>  
+                        <%if(assignedReviewer.length){%>
+                            <a href="" style="text-decoration: none; flex: 0.5; pointer-events: none; color: gray;" >Assigned for Review </a>
+                            <%}else{%>
+                                <a href="/assignReview/<%=employee._id%>/<%=employeeForReview.id%>" style="text-decoration: none; flex: 0.5; ">Ask for Review </a>
+                                <%}%>
                     </div>
                 </li>
                 <%}%>
            <%}else{%>
             <li>
                 <div>
-                    <label>Not assigned any Reviews</label>
-                    <a style="text-decoration: none; color: inherit;">Assign for Review</a>
+                    <label>No Employee Added</label>
                 </div>
             </li>
             <%}%>
         </ul>
     </div>
-    <div style="flex: 1; border: solid; padding: 10px;">
-        <h2>
+    <div id="askedFromFeedbackList" style="flex: 1; border: solid; ">
+        <h2 style="text-align: center;">
             Feedbacks asked from
         </h2>
-        <ul style="list-style: none;">
-            <li style="border: solid;">
-                <div>
-                    <label>test </label>
-                </div>
-            </li>
+        <ul style="list-style: none; height: 100px; overflow-y: auto; margin-right: 10px;">
+            <% if(employeeForReview.assigned_reviewers.length){%>
+                <% for(i of employeeForReview.assigned_reviewers){%>
+                    <li style=" height: 30px; padding: 10px; text-align: center; border: solid; border-radius: 10px; ">
+                        <div style="display: flex;">
+                            <label style="flex: 1;"><%=i.name%> </label>
+                            <%let dateVal = new Date(i.createdAt);
+                            let date= (dateVal.toDateString());%>  
+                            <label style="flex: 1;"><%=date%></label>
+                        </div>
+                    </li>
+                    <%}%>
+                <%}else{%>
+                    <li style="border: solid; text-align: center;">
+                        <div style="display: flex;">
+                            <label style="flex: 1;">Not asked from Anyone</label>
+                        </div>
+                    </li>
+                    <%}%>
         </ul>
     </div>
 </div>
-<div style="border: solid; padding: 10px;">
+<div id="receivedFeedbackList" style="text-align: center; border: solid; ">
     <h2>
         Feedbacks Received
     </h2>
-<ul>
-    <li>
-      <div>
-        <label for="">Good</label>
-        <label for="">From test</label>
-        <label for="">email</label>
-      </div>
-    </li>
+<ul style="list-style: none; text-align: center; height: 150px; overflow-y: auto; display: flex; flex-wrap: wrap; flex-direction: row;">
+   <%if(reviews.length){%>
+    <%for(review of reviews){%>
+        <li style=" height: 100px; width: 300px; padding: 10px; border: solid;  border-radius: 10px; margin: 10px;">
+            <table >
+                <tr>
+                    <td><label for=""><strong>Feedback : </strong><%=review.feedback%></label><br></td>
+                </tr>
+                <tr>
+                    <td><label for=""><strong>Feedback By : </strong><%=review.reviewed_by.name%></label><br></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for=""><strong>Email : </strong><%=review.reviewed_by.email%></label><br>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td>
+                        <strong><a href="/admin/update-review/<%=review.id%>/<%=employeeForReview.id%>">Edit</a></strong>
+                    </td>
+                </tr>
+            </table>
+          </li>
+        <%}%>
+    <%}else{%>
+        <li>
+            <div>
+              <h3><label for="">No Reviews Submitted</label></h3>
+            </div>
+          </li>
+        <%}%>
 </ul>
 </div>

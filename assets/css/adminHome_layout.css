@@ -1,0 +1,92 @@
+h1{
+    color: white;
+}
+body{
+    background-color: blueviolet;
+}
+p{
+    font-size: larger;
+}
+#tbl-add-emp label{
+    font-size: large;
+}
+/* Style all input elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+width: 100%;
+padding: 12px;
+margin: 8px 0;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 16px;
+}
+
+/* Style for input elements on focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+border: 2px solid #3498db;
+}
+/* Style for submit button */
+input[type="submit"] {
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+border: none;
+border-radius: 5px;
+background-color: #3498db;
+color: #fff;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+background-color: #2980b9;
+}
+
+/* Additional styling for better accessibility */
+input:focus {
+outline: none;
+box-shadow: 0 0 5px rgba(52, 152, 219, 0.8);
+}
+#SubmittedReviews{
+margin:4px, 4px;
+            padding:4px;
+            height: 40%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align:justify;
+}
+#usersDiv{
+margin:4px, 4px;
+            padding:4px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align:justify;
+}
+#adminHomeContainer a{
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+border: none;
+border-radius: 5px;
+background-color: #3498db;
+color: #fff;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+

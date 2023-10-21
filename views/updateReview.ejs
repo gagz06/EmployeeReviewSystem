@@ -1,0 +1,116 @@
+<div id="container">
+<div id="formContainer">
+<form action="/admin/updateFeedback/<%=review.id%>/<%=emp.id%>" method="post">
+    <table>
+        <tr>
+            <td><label for="">Reviewed To</label></td>
+            <td>
+                <label for=""><%=review.review_to.name%></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="">Reviewed by</label>
+            </td>
+            <td>
+                <label for=""><%=review.reviewed_by.name%></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="">Feedback</label>
+            </td>
+            <td>
+                <div>
+                    <textarea type="text"  name="feedback" id="feedback" rows="5" cols="30"required disabled><%=review.feedback%></textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="">Teamwork</label></td>
+            <td>
+                <div id="teamworkDiv">
+                    <fieldset id="teamworkFieldset" disabled>
+                        <input type="radio" name="teamworkRating" value="1" <%= review.teamwork == "1" ? 'checked' : '' %> required>1
+                        <input type="radio" name="teamworkRating" value="2" <%= review.teamwork == "2" ? 'checked' : '' %>>2
+                        <input type="radio" name="teamworkRating" value="3" <%= review.teamwork == "3" ? 'checked' : '' %>>3
+                        <input type="radio" name="teamworkRating" value="4" <%= review.teamwork == "4" ? 'checked' : '' %>>4
+                        <input type="radio" name="teamworkRating" value="5" <%= review.teamwork == "5" ? 'checked' : '' %>>5
+                    </fieldset>
+                    
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>knowledge</td>
+            <td>
+                <div id="knowledgeDiv">
+                    <fieldset id="knowledgeFieldset" disabled>
+                        <input type="radio" name="knowledgeRating" value="1"<%= review.knowledge == "1" ? 'checked' : '' %> required>1
+                        <input type="radio" name="knowledgeRating" value="2"<%= review.knowledge == "2" ? 'checked' : '' %>>2
+                        <input type="radio" name="knowledgeRating" value="3"<%= review.knowledge == "3" ? 'checked' : '' %>>3
+                        <input type="radio" name="knowledgeRating" value="4"<%= review.knowledge == "4" ? 'checked' : '' %>>4
+                        <input type="radio" name="knowledgeRating" value="5"<%= review.knowledge == "5" ? 'checked' : '' %>>5
+                    </fieldset>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Communication</td>
+            <td>
+                <div id="communicationDiv">
+                    <fieldset id="communicationFieldset" disabled>
+                        <input type="radio" name="communicationRating" value="1"value="5"<%= review.communication == "1" ? 'checked' : '' %> required>1
+                        <input type="radio" name="communicationRating" value="2"value="5"<%= review.communication == "2" ? 'checked' : '' %>>2
+                        <input type="radio" name="communicationRating" value="3"value="5"<%= review.communication == "3" ? 'checked' : '' %>>3
+                        <input type="radio" name="communicationRating" value="4"value="5"<%= review.communication == "4" ? 'checked' : '' %>>4
+                        <input type="radio" name="communicationRating" value="5"value="5"<%= review.communication == "5" ? 'checked' : '' %>>5
+                    </fieldset>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <td>
+                    <button id="btnEdit">Edit</button>
+                    <button id="deleteEmp"><a style="color: black;" href="/admin/delete/<%=review._id%>/<%=emp.id%>">Delete</a></button>
+                    <input type="submit" value="Update" id="btnSubmit" style="display: none;">
+                    <button id="btnCancel" style="display: none;">Cancel</button>
+                </td>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+</div>
+<script>
+    const editButton=document.getElementById("btnEdit");
+    const cancelButton = document.getElementById("btnCancel");
+    const deleteButton = document.getElementById("deleteEmp");
+    const textArea = document.getElementById('feedback');
+    editButton.onclick= function(event){
+        event.preventDefault();
+        document.getElementById("btnSubmit").style.display="inline";
+        editButton.style.display="none";
+        const inputFields = document.querySelectorAll('fieldset');
+        inputFields.forEach(function(inputFields){
+            inputFields.disabled=false;
+        });
+        textArea.disabled=false;
+        cancelButton.style.display="inline";
+        deleteButton.style.display="none";
+    };
+    
+        cancelButton.onclick= function (event) {
+        event.preventDefault();
+        document.getElementById("btnSubmit").style.display="none";
+        editButton.style.display="inline";
+        const inputFields = document.querySelectorAll('fieldset');
+        inputFields.forEach(function(inputFields){
+            inputFields.disabled=true;
+        });
+        textArea.disabled=true;
+        cancelButton.style.display="none";
+        deleteButton.style.display="inline";
+    }
+</script>
