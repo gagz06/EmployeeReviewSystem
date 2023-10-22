@@ -1,0 +1,38 @@
+
+    h2{
+        color: yellow;
+    }
+    body{
+        background-color: blueviolet;
+        background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
+    }
+    #receivedFeedbackList label{
+        color: white;
+        font-size: large;
+    }
+    #feedbacksfor label{
+        color: white;
+        font-size: large;
+    }
+    #askedFromFeedbackList label{
+        color: white;
+        font-size: large;
+    }
+    #empList label{
+        color: white;
+        font-size: large;
+    }
+div a{
+        display: inline-block;
+padding: 5px ;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+border: none;
+border-radius: 5px;
+background-color: #3498db;
+color: #fff;
+cursor: pointer;
+transition: background-color 0.3s ease;
+    }

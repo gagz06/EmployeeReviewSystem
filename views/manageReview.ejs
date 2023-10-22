@@ -1,42 +1,4 @@
-<style>
-    h2{
-        color: yellow;
-    }
-    body{
-        background-color: blueviolet;
-    }
-    #receivedFeedbackList label{
-        color: white;
-        font-size: large;
-    }
-    #feedbacksfor label{
-        color: white;
-        font-size: large;
-    }
-    #askedFromFeedbackList label{
-        color: white;
-        font-size: large;
-    }
-    #empList label{
-        color: white;
-        font-size: large;
-    }
-div a{
-        display: inline-block;
-padding: 5px ;
-font-size: 16px;
-font-weight: bold;
-text-align: center;
-text-decoration: none;
-border: none;
-border-radius: 5px;
-background-color: #3498db;
-color: #fff;
-cursor: pointer;
-transition: background-color 0.3s ease;
-    }
-</style>
-
+<link rel="stylesheet" href="/css/manageReview_layout.css">
 <div id="empList" style="display: flex; padding: 10px;">
     <div id="assignReview" style="flex: 1; padding: 10px; border: solid;">
         <h2 style="text-align: center;">Ask Feedback for: <i><%=employeeForReview.name%></i></h2>

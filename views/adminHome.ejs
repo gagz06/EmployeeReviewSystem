@@ -1,16 +1,16 @@
 <link rel="stylesheet" href="/css/adminHome_layout.css">
-<h2>
+<h1>
     <center>
         Admin Panel
     </center>
-</h2>
+</h1>
 
 <div id="adminHomeContainer">
 
     <div  style="display: flex;">
         <div id="usersDiv" style=" padding: 5px; flex: 1; border: solid;">
             <p>
-                <h1 style="text-align: center;">Select Employee for feedback</h1>
+                <h2 style="text-align: center;">Select Employee for feedback</h2>
             </p>
             <ul style="list-style: none; height: 350px; overflow-y: auto;">
                 <% for(employee of employeeList) {%>
@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div style=" padding-left: 10px; flex: 1; border: solid;">
-            <h1 style="text-align: center;">Add New User</h1>
+            <h2 style="text-align: center;">Add New User</h2>
             <form style="padding:0px 0px 10px 10px;" action="/employee/create" method="post">
                 <table id="tbl-add-emp">
                     <tr>

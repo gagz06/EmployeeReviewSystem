@@ -4,6 +4,7 @@ h1{
 
 body{
     background-color: blueviolet;
+    background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
 }
 #signUp-container{
     display: flex;
@@ -19,9 +20,7 @@ body{
 #new-employee-form label{
     font-size: x-large;
 }
-#new-employee-form input{
 
-}
 
 /* Style all input elements */
 input[type="text"],

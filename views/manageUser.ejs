@@ -1,5 +1,7 @@
-<div style="display: flex;">
-    <div style="border: solid; padding: 10px; flex: 1;">
+<link rel="stylesheet" href="/css/manageUser_layout.css">
+<h1 style="text-align: center; color: yellow;">Manage User</h1>
+<div style="display: flex; align-content: center; justify-content: center;">
+    <div style="border: solid; border-radius: 20px; padding: 10px;  background-color: #f9f9f9;">
         <form id="updateempForm" method="post" action="/Employee/update/<%=emp._id%>">
             <table>
                 <tr>
@@ -35,7 +37,7 @@
                     </td>
                 </tr> -->
                 <tr>
-                    <td>Access Type</td>
+                    <td><label for="">Access Type</label></td>
                     <td>
                         <fieldset id="empAcessType">
                             <input type="radio" name="role" value="Admin" disabled <%= emp.userAccessType === "Admin" ? 'checked' : '' %>>Admin
@@ -49,7 +51,7 @@
                     </td>
                     <td>
                         <button id="btnEdit">Edit</button>
-                        <button id="deleteEmp"><a style="color: black;" href="/emp/delete/<%=emp._id%>">Delete</a></button>
+                        <button id="deleteEmp"><a style="color: inherit;" href="/employee/delete/<%=emp._id%>">Delete</a></button>
                         <input type="submit" value="Update" id="btnSubmit" style="display: none;">
                         <button id="btnCancel" style="display: none;">Cancel</button>
                     </td>

@@ -1,42 +1,7 @@
-h1{
-    color: yellow;
-}
 body{
-    background-color: #8a2be2;
+    background-color: blueviolet;
     background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
 }
-label{
-    font-size: larger;
-    font-weight: bold;
-}
-#signnDiv{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-#signIn-container{
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-/* Style all input elements */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-textarea,
-select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
 /* Style for input elements on focus */
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -71,4 +36,44 @@ input[type="submit"]:hover {
 input:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.8);
+}
+button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+/* Style for input elements on focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border: 2px solid #3498db;
+}
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+label{
+    font-size: larger;
+    font-weight:bold
 }

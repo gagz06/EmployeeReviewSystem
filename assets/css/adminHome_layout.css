@@ -1,8 +1,16 @@
 h1{
+    color: yellow;
+}
+h2{
     color: white;
+}
+label{
+    color: white;
+    
 }
 body{
     background-color: blueviolet;
+    background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
 }
 p{
     font-size: larger;

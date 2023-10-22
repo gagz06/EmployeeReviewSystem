@@ -1,10 +1,14 @@
-<div id="container">
-<div id="formContainer">
+<link rel="stylesheet" href="/css/updateReview_layout.css">
+<h1 style="text-align: center; color: yellow;">
+    Update Review
+</h1>
+<div id="container" style="display: flex; align-content: center; justify-content: center;">
+<div id="formContainer" >
 <form action="/admin/updateFeedback/<%=review.id%>/<%=emp.id%>" method="post">
     <table>
         <tr>
             <td><label for="">Reviewed To</label></td>
-            <td>
+            <td style="border:1px solid #ccc;;">
                 <label for=""><%=review.review_to.name%></label>
             </td>
         </tr>
@@ -12,7 +16,7 @@
             <td>
                 <label for="">Reviewed by</label>
             </td>
-            <td>
+            <td style="border:1px solid #ccc;;">
                 <label for=""><%=review.reviewed_by.name%></label>
             </td>
         </tr>
@@ -42,7 +46,7 @@
             </td>
         </tr>
         <tr>
-            <td>knowledge</td>
+            <td><label for="">Knowledge</label></td>
             <td>
                 <div id="knowledgeDiv">
                     <fieldset id="knowledgeFieldset" disabled>
@@ -56,7 +60,7 @@
             </td>
         </tr>
         <tr>
-            <td>Communication</td>
+            <td><label for="">Communication</label></td>
             <td>
                 <div id="communicationDiv">
                     <fieldset id="communicationFieldset" disabled>
@@ -73,7 +77,7 @@
             <td>
                 <td>
                     <button id="btnEdit">Edit</button>
-                    <button id="deleteEmp"><a style="color: black;" href="/admin/delete/<%=review._id%>/<%=emp.id%>">Delete</a></button>
+                    <button id="deleteEmp"><a style="color: inherit;" href="/admin/delete/<%=review._id%>/<%=emp.id%>">Delete</a></button>
                     <input type="submit" value="Update" id="btnSubmit" style="display: none;">
                     <button id="btnCancel" style="display: none;">Cancel</button>
                 </td>
