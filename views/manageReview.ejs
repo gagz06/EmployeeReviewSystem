@@ -29,7 +29,7 @@
             <%}%>
         </ul>
     </div>
-    <div id="askedFromFeedbackList" style="flex: 1; border: solid; ">
+    <div id="askedFromFeedbackList" style="flex: 1; border: solid; margin-left: 5px;">
         <h2 style="text-align: center;">
             Feedbacks asked from
         </h2>
@@ -62,7 +62,7 @@
 <ul style="list-style: none; text-align: center; height: 150px; overflow-y: auto; display: flex; flex-wrap: wrap; flex-direction: row;">
    <%if(reviews.length){%>
     <%for(review of reviews){%>
-        <li style=" height: 100px; width: 300px; padding: 10px; border: solid;  border-radius: 10px; margin: 10px;">
+        <li style=" height: 140px; width: 300px; padding: 10px; border: solid;  border-radius: 10px; margin: 10px;">
             <table >
                 <tr>
                     <td><label for=""><strong>Feedback : </strong><%=review.feedback%></label><br></td>
@@ -73,6 +73,12 @@
                 <tr>
                     <td>
                         <label for=""><strong>Email : </strong><%=review.reviewed_by.email%></label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <%let dateVal = new Date(review.createdAt);
+                    let date= (dateVal.toDateString());%>  
+                    <td><label for=""><strong>Date : </strong><%=date%></label>
                     </td>
                 </tr>
                 <tr style="text-align: center;">

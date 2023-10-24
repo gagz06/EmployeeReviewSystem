@@ -13,6 +13,7 @@
                 <h2 style="text-align: center;">Select Employee for feedback</h2>
             </p>
             <ul style="list-style: none; height: 350px; overflow-y: auto;">
+                <% if(employeeList.length){%>
                 <% for(employee of employeeList) {%>
                 <li style="padding: 5px;">
                     <div style="padding: 10px; text-align: center;">
@@ -22,10 +23,16 @@
                         <strong><a href="/feedback-form/<%=employee.id%>">Submit Feedback</a></strong>
                     </div>
                 </li>
-                <%}%>
+                <%}}else{%>
+                    <li style="padding: 5px;">
+                        <div style="padding: 10px; text-align: center;">
+                            <h3><label> No Empoyee exist</label></h3>
+                        </div>
+                    </li>
+                    <%}%>
             </ul>
         </div>
-        <div style=" padding-left: 10px; flex: 1; border: solid;">
+        <div style=" padding-left: 10px; flex: 1; border: solid; margin-left: 5px;">
             <h2 style="text-align: center;">Add New User</h2>
             <form style="padding:0px 0px 10px 10px;" action="/employee/create" method="post">
                 <table id="tbl-add-emp">
@@ -67,39 +74,5 @@
             </form>
         </div>
     </div>
-    <!-- <div  style="border: solid;">
-        <div style="text-align: center;">
-            <h1>Submitted Reviews</h1>
-        </div>
-        <div>
-            <ul id="SubmittedReviews" style="list-style: none; text-align: center;">
-                <% if(performanceReviewList.length!=0){%>
-                <%for(performanceReview of performanceReviewList){%>
-                    <li>
-                        <div style="padding: 10px; display: flex; justify-content: center;">
-                            <div>
-                                <label> Feedback :
-                                    <%= performanceReview.feedback%>
-                                </label><br>
-                                <label for="">Review By :<%= performanceReview.reviewed_by.name%></label><br>
-                                <label for="">Review To :<%= performanceReview.review_to.name%></label><br>
-                            </div>
-                            <div><strong><a href="#">Manage</a></strong></div>
-                        </div>
-                    </li>
-                    <%}%>
-                    <%}else{%>
-                <li style="">
-                    <div style="padding: 10px; text-align: center;">
-                        <label>
-                           <strong> No Review Exist</strong>
-                        </label>
-                        <!-- <a href="#">Manage</a> -->
-                    </div>
-                </li>
-                <%}%>
-            </ul>
-        </div>
-    </div> -->
-
 </div>
+      

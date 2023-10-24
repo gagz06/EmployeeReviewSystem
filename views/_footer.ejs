@@ -4,9 +4,11 @@
           <!-- Your footer content here -->
         </div>
         <nav class="footer-links">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
+          <%if(locals.employee){%>
+            <% if(locals.employee.userAccessType==='Admin'){%>
+              <a href="/employee/Home">Pending Feedback</a>
+              <%}%>
+            <%}%>
         </nav>
       </footer>
       

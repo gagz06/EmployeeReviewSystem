@@ -35,5 +35,17 @@
   .header-links a {
     text-decoration: none;
     color: #fff;
+
   }
-  
+  .header-container li{
+    width: 70px;
+    text-align: center;
+    border: solid;
+    border-radius: 10px;
+  }
+  .header-container label{
+    width: 100px;
+    text-align: center;
+    border: solid;
+    border-radius: 10px;
+  }

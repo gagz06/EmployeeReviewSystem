@@ -39,6 +39,7 @@ module.exports.updateFeedback = async function (req,res) {
         }
         await updatedReview.save();
       console.log(updatedReview);
+      req.flash("success", "Employee Feedback updated successfully");
       return res.render("updateReview",{
         title:"Edit Feedback",
         review: updatedReview,
@@ -46,6 +47,7 @@ module.exports.updateFeedback = async function (req,res) {
       });
     }
     else{
+      req.flash("error", "Feedback not found");
       return res.redirect('back');
     }
   }
@@ -62,7 +64,7 @@ module.exports.updatReviewPage = async function(req,res){
     model: "Employee",
   });
   let emp = await employeeSchema.findById(req.params.from);
-  console.log(emp);
+  //console.log(emp);
   return res.render("updateReview",{
     title:"Edit Feedback",
     review: review,
@@ -76,8 +78,8 @@ module.exports.submitFeedback = async function (req,res) {
 
   //find the data of the employer by id
   let employee = await employeeSchema.findById(req.body.employeeId);
-  console.log("-----------------");
-  console.log(req.body);
+  // console.log("-----------------");
+  // console.log(req.body);
   try {
     if (reviewer && req.body.reviewerId === res.locals.employee.id) {
       if (employee) {
@@ -97,10 +99,10 @@ module.exports.submitFeedback = async function (req,res) {
         await employeeReviewRecord.save();
         // console.log(reviewer.assigned_reviews.indexOf(employee.id));
 
-        // req.flash(
-        //   "success",
-        //   `${reviewer.name} succesfully submitted feedback to ${employee.name}`
-        // );
+        req.flash(
+          "success",
+          `${reviewer.name} succesfully submitted feedback to ${employee.name}`
+        );
         return res.redirect("/adminHome");
         
 
@@ -137,6 +139,7 @@ module.exports.signOut = function (req,res) {
         if (err) {
           return next(err);
         }
+        req.flash("success", "Signed Out successfully");
         res.redirect('/employee/sign-in');
 });
 }
@@ -156,7 +159,7 @@ module.exports.adminHome = async function (req,res) {
               path: "review_to",
               model: "Employee",
             });
-            console.log(performanceReviewList);
+            //console.log(performanceReviewList);
         return res.render("adminHome",{
             title:"Admin Home",
             employeeList: filteredEmployeeList,
@@ -181,7 +184,7 @@ module.exports.manageUser = async function(req,res){
         const userId= req.params.id;
         let employee = await employeeSchema.findById(userId);
         if(employee){
-            console.log(employee);
+            //console.log(employee);
             res.render("manageUser",{
                 title:"Manage User",
                 emp:employee
@@ -189,7 +192,7 @@ module.exports.manageUser = async function(req,res){
         }
         else{
             console.log("Error in finding employee");
-            return res.redirect('back');
+            return res.redirect('/adminHome');
         }
     } catch (error) {
         console.log(error);
@@ -240,8 +243,8 @@ module.exports.assignReview = async function (req,res) {
     let employeeToForFeedback = await employeeSchema.findById(req.params.toFeedback);
     let employeeForFeedback = await employeeSchema.findById(req.params.forFeedback);
     //console.log(admin);
-    console.log(employeeToForFeedback);
-    console.log(employeeForFeedback);
+    //console.log(employeeToForFeedback);
+    //console.log(employeeForFeedback);
     if(admin && admin.userAccessType=='Admin'){
         if(employeeToForFeedback && employeeForFeedback){
             let assignedReviewList = employeeToForFeedback.assigned_reviews;
@@ -266,20 +269,23 @@ module.exports.assignReview = async function (req,res) {
             model: "Employee",
           });
 
-        console.log(employeeToForFeedback.name+' is assigned to review '+employeeForFeedback.name);
-        console.log(employeeToForFeedback);
-        console.log(employeeForFeedback);
+        // console.log(employeeToForFeedback.name+' is assigned to review '+employeeForFeedback.name);
+        // console.log(employeeToForFeedback);
+        // console.log(employeeForFeedback);
+        req.flash(
+          "success",
+          `${employeeToForFeedback.name} is assigned to review ${employeeForFeedback.name}`
+        );
         return res.redirect("back");
         }
         else{
             if (!employeeToForFeedback) {
                 console.log("reviewer does not exist");
-      
-                
+                req.flash("reviewer does not exist");
                 return res.redirect("back");
               } else if (!employeeForFeedback) {
                 console.log("employee does not exist");
-      
+                req.flash("employee does not exist");
                 return res.redirect("/adminHome");
               }
         }

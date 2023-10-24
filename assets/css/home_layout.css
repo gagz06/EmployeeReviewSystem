@@ -1,0 +1,42 @@
+
+#employeeDetailsdiv i{
+    color: white;
+}
+#employeeDetailsdiv{
+    margin-top: 50px;
+}
+h3{
+color: yellow;
+text-align: center;
+}
+#listAssignedReviews{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 230px;
+    overflow-y: auto;
+}
+#listAssignedReviews li{
+    background-color: wheat;
+    border: solid;
+    border-radius: 10px;
+    padding: 20px;
+    
+}
+#listAssignedReviews label{
+    font-size: larger;
+    padding: 10px;
+    margin-top: 10px;
+}
+#assignedUserDetails{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#assignedUserDetails a{
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: #3498db;
+  
+}

@@ -8,22 +8,24 @@
     <br>
 <div id="home-container" style="border: solid; padding: 10px;">
     <section id="feedback-list">
-        <h4>
+        <h3>
             Pending Feedbacks 
-        </h4>
+        </h3>
         <div id="feedback-list-container" >
-            <ul style="list-style: none;">
+            <ul id="listAssignedReviews" style="list-style: none;">
                 <% if(employeeDetails.assigned_reviews.length){%>
                 <%for(feedback of employeeDetails.assigned_reviews){%>
                     <li>
-                        <div>
-                            <label>
+                        <div id="assignedUserDetails">
+                            <label> <strong>Name : </strong>
                                 <%= feedback.name%>
-                            </label>
-                            <label for="">
+                            </label> 
+                            <label for=""><strong>Email : </strong>
                                 <%= feedback.email%>
                             </label>
-                            <a href="/employee/feedback-form/<%= employeeDetails.id %>/<%= feedback.id %>" style="color: black; border: solid;"><strong>Submit Feedback</strong></a>
+                            <label for="">
+                                <strong><a href="/employee/feedback-form/<%= employeeDetails.id %>/<%= feedback.id %>">Submit Feedback</a></strong>
+                            </label>
                         </div>
                     </li>
                     <%}%>

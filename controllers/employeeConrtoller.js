@@ -1,12 +1,12 @@
 const employeeSchema = require("../models/employeeModel");
 const performanceReviewSchema = require('../models/performanceReview');
 module.exports.submitFeedback = async function (req,res) {
-  console.log(req.body);
+  
   let reviewer = await employeeSchema.findById(req.body.reviewerId);
 
   //find the data of the employer by id
   let employee = await employeeSchema.findById(req.body.employeeId);
-  console.log(res.locals.employee);
+  
   try {
     if (reviewer && req.body.reviewerId === res.locals.employee.id) {
       if (employee) {
@@ -52,10 +52,10 @@ module.exports.submitFeedback = async function (req,res) {
         await employeeReviewRecord.save();
         // console.log(reviewer.assigned_reviews.indexOf(employee.id));
 
-        // req.flash(
-        //   "success",
-        //   `${reviewer.name} succesfully submitted feedback to ${employee.name}`
-        // );
+        req.flash(
+          "success",
+          `${reviewer.name} succesfully submitted feedback to ${employee.name}`
+        );
         return res.redirect("/employee/home");
       } else {
         console.log("employee does not exist");
@@ -63,13 +63,13 @@ module.exports.submitFeedback = async function (req,res) {
         return res.redirect("/employee/home");
       }
     } else {
-      console.log("unauthorised");
-      //req.flash("error", `Unauthorised access, login to continue`);
+      // console.log("unauthorised");
+      req.flash("error", `Unauthorised access, login to continue`);
       return res.redirect("/sign-out");
     }
   } catch (error) {
-    console.log(error);
-    //req.flash("error", "error in submiting feedback");
+    //console.log(error);
+    req.flash("error", "error in submiting feedback");
     return res.redirect("back" );
   }
 }
@@ -101,25 +101,30 @@ module.exports.signUp = function (req, res) {
 module.exports.create = function (req, res) {
   try {
     if (req.body.password != req.body.confirm_password) {
+      req.flash("error", "Password and confirm password doesnt match");
       return res.redirect("back");
+      
     }
     employeeSchema.findOne({ email: req.body.email }).then((err, employee) => {
       if (err) {
-        console.log("Employee already exist in db");
+        req.flash("error", "Email id alreadye exist ");
         return res.redirect("back");
       }
       if (!employee) {
         employeeSchema
           .create(req.body)
           .then(() => {
+            req.flash("success", "Employee created successfully");
             console.log("Employee created successfully");
             res.redirect("back");
           })
           .catch((err) => {
+            req.flash("error", "error in creating employee", err);
             console.log("error in creating employee", err);
           });
       } else {
-        console.log("error in line 25 employeeController");
+        req.flash("error", "Employee Already Exist");
+        
         return res.redirect("back");
       }
     });
@@ -147,13 +152,18 @@ module.exports.updateEmployee = async function (req, res) {
 
     if (employee) {
       console.log("Employee updated:", employee);
+      req.flash("success", "Employee Details Updated Successfully");
       return res.redirect("back"); // Redirect to the previous page
     } else {
-      console.log("No such Employee exists");
-      return res.status(404).send("No such Employee exists");
+      //console.log("No such Employee exists");
+      req.flash("error", "No such Employee exists");
+      return res.redirect('back');
+      
+      
     }
     }
   } catch (error) {
+
     console.log("Error in employee updation", error);
     return res.redirect("back");
   }
@@ -182,13 +192,17 @@ module.exports.deleteEmployee = async function (req, res) {
     if (empId) {
       let employee = await employeeSchema.findByIdAndRemove(empId);
       if (employee) {
-        console.log("Employee Deleted successfully");
+        //console.log("Employee Deleted successfully");
+        
+        req.flash("success", "Employee Deleted successfully");
         res.redirect("/adminHome");
       } else {
-        console.log("Employee doesnt exist");
+        //console.log("Employee doesnt exist");
+        req.flash("error", "Employee doesnt exist");
         res.redirect("back");
       }
     } else {
+      req.flash("error", "Employee doesnt exist");
       console.log("params id error");
       res.redirect("back");
     }
@@ -208,6 +222,7 @@ module.exports.signIn = function (req, res) {
 };
 module.exports.createSession = async function (req, res) {
   try {
+    req.flash("success", "Logged in succesfully");
     let emp = await employeeSchema.findOne({email:req.body.email});
     let userAccessType = emp.userAccessType;
     console.log("Sign in successfull");

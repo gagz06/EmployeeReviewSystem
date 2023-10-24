@@ -1,10 +1,11 @@
-body{
+/* body{
     background-color: blueviolet;
     background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
-}
+} */
 #formContainer{
     padding: 20px;
     border: 1px solid #ccc;
+    border: solid;
     border-radius: 10px;
     background-color: #f9f9f9;
 }

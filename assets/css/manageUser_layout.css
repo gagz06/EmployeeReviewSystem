@@ -1,7 +1,7 @@
-body{
+/* body{
     background-color: blueviolet;
     background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
-}
+} */
 /* Style for input elements on focus */
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -73,7 +73,7 @@ select {
     box-sizing: border-box;
     font-size: 16px;
 }
-label{
+#manageUserDiv label{
     font-size: larger;
     font-weight:bold
 }

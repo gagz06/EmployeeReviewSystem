@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/manageUser_layout.css">
-<h1 style="text-align: center; color: yellow;">Manage User</h1>
-<div style="display: flex; align-content: center; justify-content: center;">
+<h1 style="text-align: center; color: yellow; margin-top: 40px;">Manage User</h1>
+<div id="manageUserDiv" style="display: flex; align-content: center; justify-content: center;">
     <div style="border: solid; border-radius: 20px; padding: 10px;  background-color: #f9f9f9;">
         <form id="updateempForm" method="post" action="/Employee/update/<%=emp._id%>">
             <table>
@@ -41,7 +41,7 @@
                     <td>
                         <fieldset id="empAcessType">
                             <input type="radio" name="role" value="Admin" disabled <%= emp.userAccessType === "Admin" ? 'checked' : '' %>>Admin
-                            <input type="radio" name="role" value="emp" disabled <%= emp.userAccessType === "Employee" ? 'checked' : '' %>>Employee
+                            <input type="radio" name="role" value="Employee" disabled <%= emp.userAccessType === "Employee" ? 'checked' : '' %>>Employee
                         </fieldset>
                     </td>
                 </tr>
