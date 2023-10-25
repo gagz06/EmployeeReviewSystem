@@ -2,7 +2,7 @@
 <h1 style="text-align: center; color: yellow; margin-top: 40px;">Manage User</h1>
 <div id="manageUserDiv" style="display: flex; align-content: center; justify-content: center;">
     <div style="border: solid; border-radius: 20px; padding: 10px;  background-color: #f9f9f9;">
-        <form id="updateempForm" method="post" action="/Employee/update/<%=emp._id%>">
+        <form id="updateempForm" method="post" action="/admin/update/<%=emp._id%>">
             <table>
                 <tr>
                     <td>
@@ -51,7 +51,7 @@
                     </td>
                     <td>
                         <button id="btnEdit">Edit</button>
-                        <button id="deleteEmp"><a style="color: inherit;" href="/employee/delete/<%=emp._id%>">Delete</a></button>
+                        <button id="deleteEmp"><a style="color: inherit; text-decoration: none;" href="/admin/delete/<%=emp._id%>">Delete</a></button>
                         <input type="submit" value="Update" id="btnSubmit" style="display: none;">
                         <button id="btnCancel" style="display: none;">Cancel</button>
                     </td>

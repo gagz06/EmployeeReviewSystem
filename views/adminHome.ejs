@@ -8,7 +8,7 @@
 <div id="adminHomeContainer">
 
     <div  style="display: flex;">
-        <div id="usersDiv" style=" padding: 5px; flex: 1; border: solid;">
+        <div id="usersDiv" style=" padding: 5px; flex: 1; border: solid; margin-left: 5px;">
             <p>
                 <h2 style="text-align: center;">Select Employee for feedback</h2>
             </p>
@@ -18,9 +18,9 @@
                 <li style="padding: 5px;">
                     <div style="padding: 10px; text-align: center;">
                         <h3><label> <%=employee.name%></label></h3>
-                        <strong><a href="/manageReview/<%=employee.id%>">Manage Review</a></strong>
-                        <strong><a href="/manageUser/<%=employee.id%>">Manage User</a></strong>
-                        <strong><a href="/feedback-form/<%=employee.id%>">Submit Feedback</a></strong>
+                        <strong><a href="/admin/manageReview/<%=employee.id%>">Manage Review</a></strong>
+                        <strong><a href="/admin/manageUser/<%=employee.id%>">Manage User</a></strong>
+                        <strong><a href="/admin/feedback-form/<%=employee.id%>">Submit Feedback</a></strong>
                     </div>
                 </li>
                 <%}}else{%>
@@ -32,9 +32,9 @@
                     <%}%>
             </ul>
         </div>
-        <div style=" padding-left: 10px; flex: 1; border: solid; margin-left: 5px;">
-            <h2 style="text-align: center;">Add New User</h2>
-            <form style="padding:0px 0px 10px 10px;" action="/employee/create" method="post">
+        <div style=" padding-left: 10px; flex: 1; border: solid; margin-left: 5px; margin-right: 5px;">
+            <p><h2 style="text-align: center;">Add New User</h2></p>
+            <form style="padding:0px 0px 10px 10px;" action="/admin/create" method="post">
                 <table id="tbl-add-emp">
                     <tr>
                         <td><label><strong>Name:</strong></label></td>

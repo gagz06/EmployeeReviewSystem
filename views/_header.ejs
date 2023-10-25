@@ -6,10 +6,10 @@
         <nav>
           <ul class="header-links">
             <% if(!locals.employee){%>
-            <li><a href="/employee/sign-in">Sign IN</a></li>
-            <li><a href="/employee/sign-up">Sign UP</a></li>
+            <li><a href="/sign-in">Sign IN</a></li>
+            <li><a href="/sign-up">Sign UP</a></li>
             <%}else if(locals.employee.userAccessType==='Admin'){%>
-              <li><a href="/adminHome">Home</a></li>
+              <li><a href="/admin/adminHome">Home</a></li>
               <li><a href="/sign-out">Sign Out</a></li>
             <%}else{%>
               <li><a href="/employee/home">Home</a></li>

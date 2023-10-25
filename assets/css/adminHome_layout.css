@@ -98,3 +98,6 @@ cursor: pointer;
 transition: background-color 0.3s ease;
 }
 
+td{
+    padding: 5px;
+}

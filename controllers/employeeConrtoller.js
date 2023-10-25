@@ -1,12 +1,11 @@
 const employeeSchema = require("../models/employeeModel");
-const performanceReviewSchema = require('../models/performanceReview');
-module.exports.submitFeedback = async function (req,res) {
-  
+const performanceReviewSchema = require("../models/performanceReview");
+module.exports.submitFeedback = async function (req, res) {
   let reviewer = await employeeSchema.findById(req.body.reviewerId);
 
   //find the data of the employer by id
   let employee = await employeeSchema.findById(req.body.employeeId);
-  
+
   try {
     if (reviewer && req.body.reviewerId === res.locals.employee.id) {
       if (employee) {
@@ -18,7 +17,7 @@ module.exports.submitFeedback = async function (req,res) {
             teamwork: req.body.teamworkRating,
             knowledge: req.body.knowledgeRating,
             communication: req.body.communicationRating,
-            feedback : req.body.feedback,
+            feedback: req.body.feedback,
             review_to: employee,
             reviewed_by: reviewer,
           });
@@ -70,181 +69,39 @@ module.exports.submitFeedback = async function (req,res) {
   } catch (error) {
     //console.log(error);
     req.flash("error", "error in submiting feedback");
-    return res.redirect("back" );
+    return res.redirect("back");
   }
-}
-module.exports.feedBackForm = async function (req,res) {
+};
+module.exports.feedBackForm = async function (req, res) {
   try {
     //find the data of the reviewer by id
-  let reviewer = await employeeSchema.findById(req.params.reviewerId);
+    let reviewer = await employeeSchema.findById(req.params.reviewerId);
 
-  //find the data of the employee by id
-  let emp = await employeeSchema.findById(req.params.employeeId);
-  return res.render('feedback_Form',{
-    title:'Feedback',
-    emp:emp,
-    reviewer:reviewer
-  })
-  
-  } catch (error) {
-    console.log(error);
-  }
-}
-module.exports.signUp = function (req, res) {
-    if (req.isAuthenticated()) {
-        return res.redirect("/employee/home");
-      }
-  return res.render("employee_sign_up", {
-    title: "ERS | Sign UP!",
-  });
-};
-module.exports.create = function (req, res) {
-  try {
-    if (req.body.password != req.body.confirm_password) {
-      req.flash("error", "Password and confirm password doesnt match");
-      return res.redirect("back");
-      
-    }
-    employeeSchema.findOne({ email: req.body.email }).then((err, employee) => {
-      if (err) {
-        req.flash("error", "Email id alreadye exist ");
-        return res.redirect("back");
-      }
-      if (!employee) {
-        employeeSchema
-          .create(req.body)
-          .then(() => {
-            req.flash("success", "Employee created successfully");
-            console.log("Employee created successfully");
-            res.redirect("back");
-          })
-          .catch((err) => {
-            req.flash("error", "error in creating employee", err);
-            console.log("error in creating employee", err);
-          });
-      } else {
-        req.flash("error", "Employee Already Exist");
-        
-        return res.redirect("back");
-      }
+    //find the data of the employee by id
+    let emp = await employeeSchema.findById(req.params.employeeId);
+    return res.render("feedback_Form", {
+      title: "Feedback",
+      emp: emp,
+      reviewer: reviewer,
     });
   } catch (error) {
-    console.log("Error in employee creation", error);
-    return res.redirect("back");
-  }
-};
-
-module.exports.updateEmployee = async function (req, res) {
-  try {
-    if(res.locals.employee.userAccessType=='Admin'){
-      const empId = req.params.id;
-    const updatedEmployeeData = {
-      name: req.body.name,
-      email: req.body.email,
-      userAccessType: req.body.role,
-    };
-
-    const employee = await employeeSchema.findByIdAndUpdate(
-      empId,
-      { $set: updatedEmployeeData }, // Use $set to update only specific fields
-      { new: true } // This option returns the updated document
-    );
-
-    if (employee) {
-      console.log("Employee updated:", employee);
-      req.flash("success", "Employee Details Updated Successfully");
-      return res.redirect("back"); // Redirect to the previous page
-    } else {
-      //console.log("No such Employee exists");
-      req.flash("error", "No such Employee exists");
-      return res.redirect('back');
-      
-      
-    }
-    }
-  } catch (error) {
-
-    console.log("Error in employee updation", error);
-    return res.redirect("back");
+    console.log(error);
   }
 };
 
 module.exports.home = async function (req, res) {
-    let empId = res.locals.employee.id;
-    const employeeDetails = await employeeSchema.findById(empId).populate({
-      path: "assigned_reviewers",
+  let empId = res.locals.employee.id;
+  const employeeDetails = await employeeSchema
+    .findById(empId)
+    .populate({
       model: "Employee",
     })
     .populate({
       path: "assigned_reviews",
       model: "Employee",
     });
-    return res.render("home", {
-      title: "ERS | Home",
-      employeeDetails:employeeDetails
-    });
-  
-  
-};
-module.exports.deleteEmployee = async function (req, res) {
-  try {
-    let empId = req.params.id;
-    if (empId) {
-      let employee = await employeeSchema.findByIdAndRemove(empId);
-      if (employee) {
-        //console.log("Employee Deleted successfully");
-        
-        req.flash("success", "Employee Deleted successfully");
-        res.redirect("/adminHome");
-      } else {
-        //console.log("Employee doesnt exist");
-        req.flash("error", "Employee doesnt exist");
-        res.redirect("back");
-      }
-    } else {
-      req.flash("error", "Employee doesnt exist");
-      console.log("params id error");
-      res.redirect("back");
-    }
-  } catch (error) {
-    console.log(error);
-    res.redirect("back");
-  }
-};
-
-module.exports.signIn = function (req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/employee/home");
-  }
-  return res.render("employee_sign_in", {
-    title: "ERS | Sign IN",
+  return res.render("home", {
+    title: "ERS | Home",
+    employeeDetails: employeeDetails
   });
-};
-module.exports.createSession = async function (req, res) {
-  try {
-    req.flash("success", "Logged in succesfully");
-    let emp = await employeeSchema.findOne({email:req.body.email});
-    let userAccessType = emp.userAccessType;
-    console.log("Sign in successfull");
-    if(userAccessType== 'Employee'){
-        return res.redirect('/employee/home');
-        // return res.render("home", {
-        //     title: "ERS | Sign IN",
-        //     Heading: "Emp Home",
-        //     Employee : emp
-        //   });
-    }
-    else if(userAccessType=='Admin'){
-        return res.redirect('/adminHome');
-        // let employeeList = await employeeSchema.find({});
-        // return res.render("adminHome",{
-        //     title:"Admin Home",
-        //     employeeList: employeeList,
-        //     Admin: emp
-        // });
-    }
-    
-  } catch (error) {
-    console.log(error);
-  }
 };
