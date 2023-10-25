@@ -11,20 +11,21 @@ passport.use(
     },
     function(req,email,password,done){
         //find user and establish  the identity
-        employeeSchema.findOne({email: email})
-        .then((employee)=>{
-            if(!employee||employee.password!=password){
-                console.log('Invalid username/password');
-                //req.flash('error','Invalid username/password');
-                return done(null,false);
+        employeeSchema
+          .findOne({ email: email })
+          .then((employee) => {
+            if (!employee || employee.password != password) {
+              console.log("Invalid username/password");
+              //req.flash('error','Invalid username/password');
+              return done(null, false);
             }
-            return done(null,employee);
-        })
-        .catch((err)=>{
-            console.log('Error in finding user --> passport1');
+            return done(null, employee);
+          })
+          .catch((err) => {
+            console.log("Error in finding user --> passport1");
             //req.flash('error',err);
             return done(err);
-        });
+          });
 
     }
   )

@@ -90,11 +90,13 @@ module.exports.feedBackForm = async function (req, res) {
 };
 
 module.exports.home = async function (req, res) {
-  let empId = res.locals.employee.id;
+  try{
+    let empId = res.locals.employee.id;
   const employeeDetails = await employeeSchema
     .findById(empId)
     .populate({
-      model: "Employee",
+      path: "assigned_reviewers",
+      model: "Employee"
     })
     .populate({
       path: "assigned_reviews",
@@ -104,4 +106,9 @@ module.exports.home = async function (req, res) {
     title: "ERS | Home",
     employeeDetails: employeeDetails
   });
+  }
+  catch(error){
+    console.log(err);
+    return res.redirect('/sign-in');
+  }
 };
