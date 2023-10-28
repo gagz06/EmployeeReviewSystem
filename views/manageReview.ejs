@@ -1,21 +1,21 @@
 <link rel="stylesheet" href="/css/manageReview_layout.css">
-<div id="empList" style="display: flex; padding: 10px 0px 10px 5px;">
-    <div id="assignReview" style="flex: 1; padding: 10px; border: solid; margin-top: 5px;">
-        <h2 style="text-align: center;">Ask Feedback for: <i><%=employeeForReview.name%></i></h2>
-        <ul style="list-style: none; height: 200px; overflow-y: auto;">
+<div id="empList" >
+    <div id="assignReview">
+        <h2>Ask Feedback for: <i><%=employeeForReview.name%></i></h2>
+        <ul id="reviewByList">
            <% if(employeeList.length>0){%>
             <%for(employee of employeeList){%>
-                <li style=" padding: 10px;  border: solid; border-radius: 10px; margin: 5px;">
-                    <div style="display: flex;" >
-                        <label style="flex: 0.5;"><%= employee.name%></label>
-                        <label style="flex: 1; text-align: left;"><%= employee.email%> </label>
+                <li>
+                    <div id="divEmpDetails">
+                        <label id="lblName"><%= employee.name%></label>
+                        <label id="email"><%= employee.email%> </label>
                          <% let assignedReviewer = employee.assigned_reviews.filter((a) => { 
                         return a.equals(employeeForReview.id);
                       }); %>  
                         <%if(assignedReviewer.length){%>
-                            <a href="" style="text-decoration: none; flex: 0.5; pointer-events: none; color: gray;" >Assigned</a>
+                            <a id="assignedLink" href="">Assigned</a>
                             <%}else{%>
-                                <a href="/admin/assignReview/<%=employee._id%>/<%=employeeForReview.id%>" style="text-decoration: none; flex: 0.5; ">Ask for Review </a>
+                                <a id="unAssignedLink" href="/admin/assignReview/<%=employee._id%>/<%=employeeForReview.id%>">Ask for Review </a>
                                 <%}%>
                     </div>
                 </li>
@@ -29,40 +29,40 @@
             <%}%>
         </ul>
     </div>
-    <div id="askedFromFeedbackList" style="flex: 1; padding: 10px; border: solid; margin-left: 5px; margin-top: 5px; margin-right: 5px;">
-        <h2 style="text-align: center;">
+    <div id="askedFromFeedbackList">
+        <h2>
             Feedbacks asked from
         </h2>
-        <ul style="list-style: none; height: 200px; overflow-y: auto; margin-right: 10px;">
+        <ul id="assignedhistoryList">
             <% if(employeeForReview.assigned_reviewers.length){%>
                 <% for(i of employeeForReview.assigned_reviewers){%>
-                    <li style=" height: 50px; margin-bottom: 5px;  text-align: center; border: solid; border-radius: 10px; ">
-                        <div style="display: flex; padding: 5px;">
-                            <label style="flex: 1;"><%=i.name%> </label>
+                    <li>
+                        <div id="assignedhistoryDetails">
+                            <label><%=i.name%> </label>
                             <%let dateVal = new Date(i.createdAt);
                             let date= (dateVal.toDateString());%>  
-                            <label style="flex: 1;"><%=date%></label>
+                            <label><%=date%></label>
                         </div>
                     </li>
                     <%}%>
                 <%}else{%>
-                    <li style="border: solid; text-align: center; border-radius: 10px;">
-                        <div style="display: flex;">
-                            <label style="flex: 1;">Not asked from Anyone</label>
+                    <li id="defaultMessage">
+                        <div id="defaultMessageDiv">
+                            <label>Not asked from Anyone</label>
                         </div>
                     </li>
                     <%}%>
         </ul>
     </div>
 </div>
-<div id="receivedFeedbackList" style="text-align: center; border: solid; margin-left: 5px; margin-right: 5px;">
-    <h2 style="margin-top: 5px;">
+<div id="receivedFeedbackList">
+    <h2>
         Feedbacks Received
     </h2>
-<ul style="list-style: none; text-align: center; height: 130px; overflow-y: auto; display: flex; flex-wrap: wrap; flex-direction: row;">
+<ul id="feedbackReceivedList">
    <%if(reviews.length){%>
     <%for(review of reviews){%>
-        <li style=" height: 110px; width: 300px; padding: 10px; border: solid;  border-radius: 10px; margin: 10px;">
+        <li>
             <table >
                 
                 <tr>
@@ -75,7 +75,7 @@
                     <td><label for=""><strong>Date : </strong><%=date%></label>
                     </td>
                 </tr>
-                <tr style="text-align: center;">
+                <tr id="rowEditLink">
                     <td>
                         <strong><a href="/admin/update-review/<%=review.id%>/<%=employeeForReview.id%>">Edit</a></strong>
                     </td>

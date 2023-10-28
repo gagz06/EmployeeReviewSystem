@@ -1,56 +1,56 @@
-<link rel="stylesheet" href="/css/home_layout.css">
+<link rel="stylesheet" href="/css/emp_home_layout.css">
 <% if(locals.employee){%>
-<div style="display: flex; flex-direction: column;">
-    <div id="employeeDetailsdiv" style="text-align: center; ">
-        <h3>Name : <i>
-                <%= employeeDetails.name%>
-            </i></h3>
-        <h3>Email : <i>
-                <%= employeeDetails.email%>
-            </i></h3>
-        <h3>Access Type : <i>
-                <%= employeeDetails.userAccessType%>
-            </i></h3>
-    </div>
+    <div style="display: flex; flex-direction: column;">
+        <div id="employeeDetailsdiv">
+            <h3>Name : <i>
+                    <%= employeeDetails.name%>
+                </i></h3>
+            <h3>Email : <i>
+                    <%= employeeDetails.email%>
+                </i></h3>
+            <h3>Access Type : <i>
+                    <%= employeeDetails.userAccessType%>
+                </i></h3>
+        </div>
 
-    <div id="home-container" style="border: solid; padding: 10px 5px 0px 5px;">
-        <section id="feedback-list">
-            <h3>
-                Pending Feedbacks
-            </h3>
-            <div id="feedback-list-container">
-                <ul id="listAssignedReviews" style="list-style: none;">
-                    <% if(employeeDetails.assigned_reviews.length){%>
-                        <%for(feedback of employeeDetails.assigned_reviews){%>
-                            <li>
-                                <div id="assignedUserDetails">
-                                    <label> <strong>Name : </strong>
-                                        <%= feedback.name%>
-                                    </label>
-                                    <label for=""><strong>Email : </strong>
-                                        <%= feedback.email%>
-                                    </label>
-                                    <label for="">
-                                        <strong><a
-                                                href="/employee/feedback-form/<%= employeeDetails.id %>/<%= feedback.id %>">Submit
-                                                Feedback</a></strong>
-                                    </label>
-                                </div>
-                            </li>
-                            <%}%>
-                                <%}else{%>
-                                    <li>
-                                        <div>
-                                            <label>
-                                                No Feedbacks Pending
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <%}%>
-                </ul>
-            </div>
-        </section>
-    </div>
+        <div id="home-container">
+            <section id="feedback-list">
+                <h3>
+                    Pending Feedbacks
+                </h3>
+                <div id="feedback-list-container">
+                    <ul id="listAssignedReviews">
+                        <% if(employeeDetails.assigned_reviews.length){%>
+                            <%for(feedback of employeeDetails.assigned_reviews){%>
+                                <li>
+                                    <div id="assignedUserDetails">
+                                        <label> <strong>Name : </strong>
+                                            <%= feedback.name%>
+                                        </label>
+                                        <label for=""><strong>Email : </strong>
+                                            <%= feedback.email%>
+                                        </label>
+                                        <label for="">
+                                            <strong><a
+                                                    href="/employee/feedback-form/<%= employeeDetails.id %>/<%= feedback.id %>">Submit
+                                                    Feedback</a></strong>
+                                        </label>
+                                    </div>
+                                </li>
+                                <%}%>
+                                    <%}else{%>
+                                        <li>
+                                            <div>
+                                                <label>
+                                                    No Feedbacks Pending
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <%}%>
+                    </ul>
+                </div>
+            </section>
+        </div>
 
-</div>
+    </div>
     <%}%>

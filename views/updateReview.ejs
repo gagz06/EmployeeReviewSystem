@@ -1,14 +1,14 @@
 <link rel="stylesheet" href="/css/updateReview_layout.css">
-<h1 style="text-align: center; color: yellow;">
+<h1>
     Update Review
 </h1>
-<div id="container" style="display: flex; align-content: center; justify-content: center;">
+<div id="container">
 <div id="formContainer" >
 <form action="/admin/updateFeedback/<%=review.id%>/<%=emp.id%>" method="post">
     <table>
         <tr>
             <td><label for="">Reviewed To</label></td>
-            <td style="border:1px solid #ccc;;">
+            <td>
                 <label for=""><%=review.review_to.name%></label>
             </td>
         </tr>
@@ -16,7 +16,7 @@
             <td>
                 <label for="">Reviewed by</label>
             </td>
-            <td style="border:1px solid #ccc;;">
+            <td >
                 <label for=""><%=review.reviewed_by.name%></label>
             </td>
         </tr>
@@ -77,9 +77,9 @@
             <td>
                 <td>
                     <button id="btnEdit">Edit</button>
-                    <button id="deleteEmp"><a style="color: inherit;" href="/admin/delete/<%=review._id%>/<%=emp.id%>">Delete</a></button>
-                    <input type="submit" value="Update" id="btnSubmit" style="display: none;">
-                    <button id="btnCancel" style="display: none;">Cancel</button>
+                    <button id="deleteEmp"><a href="/admin/delete/<%=review._id%>/<%=emp.id%>">Delete</a></button>
+                    <input type="submit" value="Update" id="btnSubmit">
+                    <button id="btnCancel">Cancel</button>
                 </td>
             </td>
         </tr>

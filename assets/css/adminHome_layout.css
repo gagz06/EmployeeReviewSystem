@@ -3,6 +3,7 @@ h1{
 }
 h2{
     color: white;
+    text-align: center;
 }
 label{
     color: white;
@@ -18,6 +19,38 @@ p{
 #tbl-add-emp label{
     font-size: large;
 }
+#addNewEmployeeForm{
+    padding:0px 0px 10px 10px;
+}
+#adminMenu{
+    display: flex;
+}
+#empMenu{
+    padding: 10px; text-align: center;
+}
+#addNewEmployee{
+    padding-left: 10px; flex: 1; border: solid; margin-left: 5px; margin-right: 5px;
+}
+#defaultEmpMenu
+{
+    padding: 10px; text-align: center;
+}
+#usersDiv{
+    padding: 5px; 
+    flex: 1; 
+    border: solid;
+     margin-left: 5px;
+}
+
+#employeeList{
+    list-style: none; 
+    height: 350px; 
+    overflow-y: auto;
+}
+#employeeList li{
+    padding: 5px;
+}
+
 /* Style all input elements */
 input[type="text"],
 input[type="email"],

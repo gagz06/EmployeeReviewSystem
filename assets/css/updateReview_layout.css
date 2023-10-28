@@ -1,7 +1,19 @@
-/* body{
-    background-color: blueviolet;
-    background: linear-gradient(90deg, rgba(138,43,226,1) 16%, rgba(226,43,225,0.9976365546218487) 100%);
-} */
+h1{
+    text-align: center; color: yellow;
+}
+#container{
+    display: flex; align-content: center; justify-content: center;
+}
+#deleteEmp a{
+    color: white;
+    text-decoration: none;
+}
+#btnSubmit{
+    display: none;
+}
+#btnCancel{
+    display: none;
+}
 #formContainer{
     padding: 20px;
     border: 1px solid #ccc;
