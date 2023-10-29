@@ -1,8 +1,11 @@
 //sequalise sql alternative library
 const mongoose = require('mongoose');
-const env = require('./environment');
+//const dev = require('./environment');
+require("dotenv").config();
 //mongoose.connect(`mongodb://localhost/${env.db}`);
-mongoose.connect(`mongodb://127.0.0.1/${env.db}`);
+//mongoose.connect(`mongodb://127.0.0.1/${dev.db}`);
+mongoose.connect(process.env.MONGODB_CONNECT_URI);
+
 const db =mongoose.connection;
 
 db.on('error',console.error.bind(console,"Error connecting to db"));
