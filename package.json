@@ -23,7 +23,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "mongoose": "^7.4.4",
-    "node": "^21.1.0",
+    "node": "^20.5.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   }
