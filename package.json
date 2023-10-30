@@ -1,18 +1,4 @@
 {
-  "name": "employeereviewsystem",
-  "version": "1.0.0",
-  "description": "Employee reveiew management system",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prod_start": "NODE_ENV=PRODUCTION nodemon index.js"
-  },
-  "keywords": [
-    "social"
-  ],
-  "author": "Gagan",
-  "license": "ISC",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
@@ -26,5 +12,19 @@
     "node": "^20.5.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
-  }
+  },
+  "name": "employeereviewsystem",
+  "version": "1.0.0",
+  "description": "Employee reveiew management system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod_start": "NODE_ENV=PRODUCTION nodemon index.js"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Gagan",
+  "license": "ISC"
 }
