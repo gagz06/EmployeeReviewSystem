@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const employeeController = require('../controllers/employeeController');
+const employeeController = require('../controllers/employeeConrtoller');
 
 // Route to the home page for employees
 router.get('/home', passport.checkAuthentication, employeeController.home);

@@ -154,12 +154,21 @@ module.exports.updateFeedback = async function (req, res) {
         updatedReview.communication = communication;
       }
       await updatedReview.save();
-      console.log(updatedReview);
+      let review=await performanceReviewSchema
+      .findById(req.params.id)
+      .populate({
+        path: "reviewed_by",
+        model: "Employee",
+      })
+      .populate({
+        path: "review_to",
+        model: "Employee",
+      });
       req.flash("success", "Employee Feedback updated successfully");
       return res.render("updateReview", {
         title: "Edit Feedback",
-        review: updatedReview,
-        emp: emp,
+        review: review,
+        emp: emp
       });
     } else {
       req.flash("error", "Feedback not found");

@@ -92,3 +92,7 @@ td{
 #btnCancel{
     display: none;
 }
+#updateempForm a{
+    text-decoration: none;
+    color: white;
+}
