@@ -1,48 +1,52 @@
-const  mongoose = require("mongoose");
+const mongoose = require("mongoose");
+
+// Define the employee schema
 const employeeSchema = new mongoose.Schema({
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    name:{
+    name: {
         type: String,
         required: true
     },
-    userAccessType:{
+    userAccessType: {
         type: String,
-        enum: ['Admin', 'Employee'], 
-        default: 'Employee',
-        require: true
+        enum: ['Admin', 'Employee'], // User access type can be 'Admin' or 'Employee'
+        default: 'Employee', // Default value is 'Employee'
+        required: true
     },
-     //Assigned reviews to user
-     assigned_reviews: [
+    // Assigned reviews to user
+    assigned_reviews: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          model: "User",
+            type: mongoose.Schema.Types.ObjectId,
+            model: "User",
         },
-      ],
-      //Assigned reviewers to user
-      assigned_reviewers: [
+    ],
+    // Assigned reviewers to user
+    assigned_reviewers: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
         },
-      ],
-      //Reviews list of user
-      reviews: [
+    ],
+    // Reviews list of user
+    reviews: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Review",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review",
         },
-      ]
-},{
-    timestamps: true
+    ]
+}, {
+    timestamps: true // Include timestamps for created and updated fields
 });
 
-const Employee = mongoose.model('Employee',employeeSchema);
-module.exports=Employee;
+// Create the Employee model using the employee schema
+const Employee = mongoose.model('Employee', employeeSchema);
+
+module.exports = Employee;

@@ -1,28 +1,28 @@
 const employeeSchema = require("../models/employeeModel");
 const performanceReviewSchema = require("../models/performanceReview");
 
+// Function to create a new employee
 module.exports.create = function (req, res) {
   try {
+    // Check if the provided password and confirm_password match
     if (req.body.password != req.body.confirm_password) {
-      req.flash("error", "Password and confirm password doesnt match");
+      req.flash("error", "Password and confirm password doesn't match");
       return res.redirect("back");
     }
-    employeeSchema
-      .findOne({ email: req.body.email })
+    
+    // Check if an employee with the same email already exists
+    employeeSchema.findOne({ email: req.body.email })
       .then((employee) => {
         if (!employee) {
-          employeeSchema
-            .create(req.body)
+          // Create and save the new employee
+          employeeSchema.create(req.body)
             .then(() => {
               req.flash("success", "Employee created successfully");
               console.log("Employee created successfully");
               res.redirect("back");
             })
             .catch((createError) => {
-              req.flash(
-                "error",
-                "Error in creating employee: " + createError.message
-              );
+              req.flash("error", "Error in creating employee: " + createError.message);
               console.error("Error in creating employee:", createError);
               res.redirect("back");
             });
@@ -32,15 +32,8 @@ module.exports.create = function (req, res) {
         }
       })
       .catch((err) => {
-        req.flash(
-          "error",
-          "An error occurred while checking for existing employee: " +
-            err.message
-        );
-        console.error(
-          "An error occurred while checking for existing employee:",
-          err
-        );
+        req.flash("error", "An error occurred while checking for existing employee: " + err.message);
+        console.error("An error occurred while checking for existing employee:", err);
         res.redirect("back");
       });
   } catch (error) {
@@ -49,8 +42,10 @@ module.exports.create = function (req, res) {
   }
 };
 
+// Function to update employee details
 module.exports.updateEmployee = async function (req, res) {
   try {
+    // Check if the user's userAccessType is "Admin"
     if (res.locals.employee.userAccessType == "Admin") {
       const empId = req.params.id;
       const updatedEmployeeData = {
@@ -59,6 +54,7 @@ module.exports.updateEmployee = async function (req, res) {
         userAccessType: req.body.role,
       };
 
+      // Find and update the employee by their ID
       const employee = await employeeSchema.findByIdAndUpdate(
         empId,
         { $set: updatedEmployeeData }, // Use $set to update only specific fields
@@ -70,7 +66,6 @@ module.exports.updateEmployee = async function (req, res) {
         req.flash("success", "Employee Details Updated Successfully");
         return res.redirect("back"); // Redirect to the previous page
       } else {
-        //console.log("No such Employee exists");
         req.flash("error", "No such Employee exists");
         return res.redirect("back");
       }
@@ -81,14 +76,16 @@ module.exports.updateEmployee = async function (req, res) {
   }
 };
 
+// Function to delete an employee
 module.exports.deleteEmployee = async function (req, res) {
   try {
     let empId = req.params.id;
     if (empId) {
+      // Find and remove the employee by their ID
       let employee = await employeeSchema.findByIdAndRemove(empId);
 
       if (employee) {
-        //console.log("Employee Deleted successfully");
+        // Check if there are associated performance reviews, and delete them
         let review = await performanceReviewSchema.findOne({
           review_to: empId,
         });
@@ -104,13 +101,11 @@ module.exports.deleteEmployee = async function (req, res) {
         req.flash("success", "Employee Deleted successfully");
         res.redirect("/admin/adminHome");
       } else {
-        //console.log("Employee doesnt exist");
-        req.flash("error", "Employee doesnt exist");
+        req.flash("error", "Employee doesn't exist");
         res.redirect("back");
       }
     } else {
-      req.flash("error", "Employee doesnt exist");
-      console.log("params id error");
+      req.flash("error", "Employee doesn't exist");
       res.redirect("back");
     }
   } catch (error) {
@@ -119,11 +114,13 @@ module.exports.deleteEmployee = async function (req, res) {
   }
 };
 
+// Function to delete a feedback
 module.exports.deleteFeedback = async function (req, res) {
   try {
     if (req.params.id) {
       let reviewId = req.params.id;
       let empId = req.params.from;
+      // Find and delete the performance review by its ID
       let review = await performanceReviewSchema.findByIdAndDelete(reviewId);
       if (review) {
         return res.redirect(`/admin/manageReview/${empId}`);
@@ -135,6 +132,8 @@ module.exports.deleteFeedback = async function (req, res) {
     console.log(error);
   }
 };
+
+// Function to update feedback in a performance review
 module.exports.updateFeedback = async function (req, res) {
   if (req.params.id) {
     let updatedReview = await performanceReviewSchema.findById(req.params.id);
@@ -169,6 +168,7 @@ module.exports.updateFeedback = async function (req, res) {
   }
 };
 
+// Function to render the page for updating a review
 module.exports.updatReviewPage = async function (req, res) {
   let review = await performanceReviewSchema
     .findById(req.params.id)
@@ -181,7 +181,6 @@ module.exports.updatReviewPage = async function (req, res) {
       model: "Employee",
     });
   let emp = await employeeSchema.findById(req.params.from);
-  //console.log(emp);
   return res.render("updateReview", {
     title: "Edit Feedback",
     review: review,
@@ -189,16 +188,14 @@ module.exports.updatReviewPage = async function (req, res) {
   });
 };
 
+// Function to submit feedback for an employee
 module.exports.submitFeedback = async function (req, res) {
   let reviewer = await employeeSchema.findById(req.body.reviewerId);
-
-  //find the data of the employer by id
   let employee = await employeeSchema.findById(req.body.employeeId);
-  // console.log("-----------------");
-  // console.log(req.body);
   try {
     if (reviewer && req.body.reviewerId === res.locals.employee.id) {
       if (employee) {
+        // Create a performance review and associate it with the employee and reviewer
         let reviewObject = await performanceReviewSchema.create({
           teamwork: req.body.teamworkRating,
           knowledge: req.body.knowledgeRating,
@@ -207,17 +204,15 @@ module.exports.submitFeedback = async function (req, res) {
           review_to: employee,
           reviewed_by: reviewer,
         });
-        //save the changes into db
+        // Save the changes into the database
         await reviewObject.save();
-        //add the review recordto the employee
+        // Add the review record to the employee
         const employeeReviewRecord = await employeeSchema.findById(employee.id);
         employeeReviewRecord.reviews = reviewObject;
         await employeeReviewRecord.save();
-        // console.log(reviewer.assigned_reviews.indexOf(employee.id));
-
         req.flash(
           "success",
-          `${reviewer.name} succesfully submitted feedback to ${employee.name}`
+          `${reviewer.name} successfully submitted feedback to ${employee.name}`
         );
         return res.redirect("/admin/adminHome");
       } else {
@@ -226,17 +221,18 @@ module.exports.submitFeedback = async function (req, res) {
         return res.redirect("/admin/home");
       }
     } else {
-      console.log("unauthorised");
-      //req.flash("error", `Unauthorised access, login to continue`);
+      console.log("unauthorized");
+      req.flash("error", `Unauthorized access, login to continue`);
       return res.redirect("/sign-out");
     }
   } catch (error) {
     console.log(error);
-    //req.flash("error", "error in submiting feedback");
+    req.flash("error", "error in submitting feedback");
     return res.redirect("back");
   }
 };
 
+// Function to render the feedback form for an admin
 module.exports.adminFeedBackForm = async function (req, res) {
   let emp = await employeeSchema.findById(req.params.employeeId);
   let reviewer = await employeeSchema.findById(res.locals.employee.id);
@@ -247,11 +243,11 @@ module.exports.adminFeedBackForm = async function (req, res) {
   });
 };
 
+// Function to render the admin home page
 module.exports.adminHome = async function (req, res) {
   try {
     if (req.isAuthenticated()) {
       if (res.locals.employee.userAccessType == "Admin") {
-        //console.log(res.locals.employee);
         let employeeList = await employeeSchema.find({});
         let filteredEmployeeList = employeeList.filter(
           (employee) => employee.id !== res.locals.employee.id
@@ -275,12 +271,12 @@ module.exports.adminHome = async function (req, res) {
   }
 };
 
+// Function to manage user details
 module.exports.manageUser = async function (req, res) {
   try {
     const userId = req.params.id;
     let employee = await employeeSchema.findById(userId);
     if (employee) {
-      //console.log(employee);
       res.render("manageUser", {
         title: "Manage User",
         emp: employee,
@@ -295,6 +291,7 @@ module.exports.manageUser = async function (req, res) {
   }
 };
 
+// Function to manage employee performance reviews
 module.exports.manageReview = async function (req, res) {
   let employeeForReview = await employeeSchema
     .findById(req.params.id)
@@ -321,8 +318,6 @@ module.exports.manageReview = async function (req, res) {
       path: "review_to",
       model: "Employee",
     });
-  // console.log(reviews);
-  // console.log(employeeForReview.assigned_reviewers);
   let employeeList = await employeeSchema.find({});
   let filteredEmployeeList = employeeList.filter(
     (employee) => employee.id !== req.params.id
@@ -330,7 +325,6 @@ module.exports.manageReview = async function (req, res) {
   filteredEmployeeList = filteredEmployeeList.filter(
     (employee) => employee.userAccessType !== "Admin"
   );
-  console.log(filteredEmployeeList);
   res.render("manageReview", {
     title: "Manage Review",
     employeeList: filteredEmployeeList,
@@ -339,6 +333,7 @@ module.exports.manageReview = async function (req, res) {
   });
 };
 
+// Function to assign a review between employees
 module.exports.assignReview = async function (req, res) {
   let admin = await employeeSchema.findById(res.locals.employee.id);
   let employeeToForFeedback = await employeeSchema.findById(
@@ -347,9 +342,7 @@ module.exports.assignReview = async function (req, res) {
   let employeeForFeedback = await employeeSchema.findById(
     req.params.forFeedback
   );
-  //console.log(admin);
-  //console.log(employeeToForFeedback);
-  //console.log(employeeForFeedback);
+
   if (admin && admin.userAccessType == "Admin") {
     if (employeeToForFeedback && employeeForFeedback) {
       let assignedReviewList = employeeToForFeedback.assigned_reviews;

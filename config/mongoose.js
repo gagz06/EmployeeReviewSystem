@@ -1,4 +1,4 @@
-//sequalise sql alternative library
+
 const mongoose = require('mongoose');
 //const dev = require('./environment');
 require("dotenv").config();
