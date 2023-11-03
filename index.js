@@ -23,7 +23,7 @@ app.use(session({
     store:  mongoStore.create(
     {
         //instead of new MongoStore we used create as it's depricated
-        mongoUrl: 'mongodb://0.0.0.0/emp_review_sys',
+        mongoUrl: process.env.MONGODB_CONNECT_URI,
         autoRemove: 'disabled'
     },
     function(err){
