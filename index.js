@@ -1,3 +1,6 @@
+//Default Admin credentials
+//Email-> admin@gmail.com
+//Password-> 12
 const express = require('express');
 const env = require('./config/environment');
 const app = express();
